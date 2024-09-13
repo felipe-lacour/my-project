@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/home/home';
+import Tabla from './components/home/Tabla';
+import ListaPartidas from './components/partidas/ListaPartidas';
+import { PartidaContextProvider } from './context/partidaContext';
+import ListaJugadores from './components/jugadores/ListaJugadores';
+import { TodasPartidasContextProvider } from './context/todasPartidasContext';
+import { JugadoresContextProvider } from './context/jugadoresContext';
+import AgregarJugador from './components/jugadores/AgregarJugador';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <JugadoresContextProvider>
+      <TodasPartidasContextProvider>
+        <PartidaContextProvider>
+          <Routes>
+            <Route path='/' element={<Home children={<Tabla />} />}/>
+            <Route path='/partidas' element={<Home children={<ListaPartidas/>}/>}/>
+            <Route path='/estadisticas' element={<Home children={<h1>Estadisticas</h1>} />}/>
+            <Route path='/torneo' element={<Home children={<h1>Torneo</h1>} />}/>
+            <Route path='/jugadores' element={<Home children={<ListaJugadores />} />}/>
+            <Route path='/jugadores/agregar' element={<Home children={<AgregarJugador />} />}/>
+          </Routes>
+        </PartidaContextProvider>
+      </TodasPartidasContextProvider>
+    </JugadoresContextProvider>
+  )
 }
-
-export default App;
