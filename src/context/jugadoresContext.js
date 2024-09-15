@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { useJugadores } from '../customHooks/useJugadores.jsx'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'; // Import Firebase storage functions
 import app from '../index.js'; // Import the initialized app
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { getFirestore, collection, addDoc, getDocs } from 'firebase/firestore'
 
 
@@ -14,6 +14,8 @@ const JugadoresContextProvider = ({children}) => {
     const [downloadURL, setDownloadURL] = useState(null);
     const [nombre, setNombre] = useState('');
     const navigate = useNavigate();
+    const location = useLocation(); // Hook to access the current URL
+    const currentPath = location.pathname;
     const [jugadores, setJugadores] = useState([])
     let jugadoresList = useJugadores();
 
@@ -22,7 +24,9 @@ const JugadoresContextProvider = ({children}) => {
     }, [jugadoresList])
 
     useEffect(() => {
-        navigate('/jugadores');
+        setNombre('');
+        setUploadProgress(0);
+        if(currentPath === '/jugadore/agregar') navigate('/jugadores');
         // eslint-disable-next-line
     }, [jugadores]);
 
@@ -50,7 +54,10 @@ const JugadoresContextProvider = ({children}) => {
                     const playerData = {
                         nombre: nombre,
                         img: url,
-                        partidasGanadas: 0
+                        partidasGanadas: 0,
+                        partidasJugadas: 0,
+                        manosJugadas: 0,
+                        manosCumplidas: 0
                     };
 
                     const db = getFirestore();

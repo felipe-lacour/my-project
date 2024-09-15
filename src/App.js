@@ -7,6 +7,7 @@ import ListaJugadores from './components/jugadores/ListaJugadores';
 import { TodasPartidasContextProvider } from './context/todasPartidasContext';
 import { JugadoresContextProvider } from './context/jugadoresContext';
 import AgregarJugador from './components/jugadores/AgregarJugador';
+import { PartidaPrevia } from './components/partidas/PartidaPrevia';
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <PartidaContextProvider>
           <Routes>
             <Route path='/' element={<Home children={<Tabla />} />}/>
+            <Route path='/partidas/:id' element={<Home children={<PartidaPrevia />} />}/>
             <Route path='/partidas' element={<Home children={<ListaPartidas/>}/>}/>
             <Route path='/estadisticas' element={<Home children={<h1>Estadisticas</h1>} />}/>
             <Route path='/torneo' element={<Home children={<h1>Torneo</h1>} />}/>
