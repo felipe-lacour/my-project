@@ -3,7 +3,7 @@ import closeDark from "../../img/closeDark.svg";
 import { JugadoresContext } from "../../context/jugadoresContext";
 import { PartidaContext } from "../../context/partidaContext";
 
-export default function Eleccion({ setEleccion, generarTablero }) {
+export default function Eleccion({ setEleccion, generarTablero, updatePlayerAttribute }) {
     const { jugadores } = useContext(JugadoresContext);
     const {setNombres} = useContext(PartidaContext)
     const [selectedJugadores, setSelectedJugadores] = useState([]);
@@ -60,6 +60,9 @@ export default function Eleccion({ setEleccion, generarTablero }) {
             </div>
             <button 
                 onClick={() => {
+                    if(selectedJugadores.length){
+                        selectedJugadores.forEach((i) => updatePlayerAttribute(i.id, 'partidasJugadas'))
+                    }
                     setNombres(selectedJugadores)
                     generarTablero(selectedJugadores)
                     setEleccion(false)

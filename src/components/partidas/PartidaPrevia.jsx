@@ -59,12 +59,14 @@ export const PartidaPrevia = () => {
         if (partidaId) {
             fetchData();
         }
+        // eslint-disable-next-line
     }, [partidaId, manoActual, jugadores, db, setNombres, setSequence]);
 
     useEffect(() => {
         console.log('sequence:', sequence);
         console.log('nombres:', nombres);
         console.log('mano', mano)
+        // eslint-disable-next-line
     }, [sequence, nombres]);
 
     if (loading) {

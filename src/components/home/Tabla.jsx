@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import Casilla from './Casilla';
 import {PartidaContext} from '../../context/partidaContext.js'
 import GuardarPartida from './GuardarPartida.jsx';
@@ -20,20 +20,12 @@ export default function Tabla() {
 
     console.log(sequence)
 
-  useEffect(() => {
-    if(nombres.length){
-      nombres.forEach((i) => updatePlayerAttribute(i.id, 'partidasJugadas'))
-    }
-    // eslint-disable-next-line
-  }, [nombres]);
-
-
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       {!nombres.length ? (
       <div className="sm:flex sm:items-center">
         <div className="mt-4 sm:mt-0 sm:flex-none">
-          <IniciarPartida nombres={nombres} generarTablero={generarTablero}/>
+          <IniciarPartida nombres={nombres} generarTablero={generarTablero} updatePlayerAttribute={updatePlayerAttribute}/>
         </div>
       </div>
       ) : (

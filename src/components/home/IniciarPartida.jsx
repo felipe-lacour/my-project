@@ -2,14 +2,15 @@ import { useState } from "react"
 import Eleccion from "./Eleccion"
 
 
-export default function IniciarPartida({generarTablero}){
+export default function IniciarPartida({generarTablero, updatePlayerAttribute}){
     const [eligiendo, setEligiendo] = useState(false)
+
 
     return(
         <>
             {eligiendo ? (
                 <div className="before:contents-[] before:w-screen before:h-screen before:bg-slate-950/70 before:fixed before:top-0 before:left-0">
-                    <Eleccion setEleccion={setEligiendo} generarTablero={generarTablero}/>
+                    <Eleccion setEleccion={setEligiendo} generarTablero={generarTablero} updatePlayerAttribute={updatePlayerAttribute}/>
                 </div>
             ): (
             <div>
